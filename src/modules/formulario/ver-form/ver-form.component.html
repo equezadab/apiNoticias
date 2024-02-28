@@ -1,0 +1,40 @@
+<mat-card class="form">
+    <mat-card-content>Filtra por País y Categoría</mat-card-content>
+    <mat-card-content class="subtitulo">Por favor, ingresé los seleccione los siguientes datos:</mat-card-content>
+    <mat-card-content class="selec1">
+            <mat-form-field appearance="outline" style="width: 300px;">
+                <mat-label>País</mat-label>
+                <mat-select [(ngModel)]="paisSelect">
+                    <mat-option [value]="pais.value" *ngFor="let pais of paises" >{{pais.nombre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+    </mat-card-content>
+    <mat-card-content>
+        <mat-form-field appearance="outline" style="width: 300px;">
+            <mat-label>Categoría</mat-label>
+            <mat-select [(ngModel)]="categoriaSelect">
+                <mat-option  [value]="categoria.value" *ngFor="let categoria of categorias">{{categoria.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-content>
+        <button (click)="buscarNoticias()" class="botonBuscar" mat-raised-button color="primary">Buscar</button>
+    </mat-card-content>
+</mat-card>
+
+<mat-card *ngFor=" let noticia of listaNoticias" class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ noticia.title }}</mat-card-title>
+      <mat-card-subtitle>{{ noticia.author }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="noticia.urlToImage ? noticia.urlToImage : 'assets/imagenNews.png'">
+    <mat-card-content>
+      <p class="noticiaFecha" style="display: flex; justify-content: center;">
+       Fecha de Publicación: {{ obtenerSoloFecha(noticia.publishedAt)}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-raised-button color="primary" href={{noticia.url}} target="_blank">Ver Noticia</a>
+    </mat-card-actions>
+  </mat-card>
